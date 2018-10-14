@@ -21,7 +21,7 @@ class SearchBook extends Component {
    * Description : update the query state variable entered in the input box.
    * Parameters : query string
    */
-   
+
   updateQuery = (query) => {
     this.setState({query: query})
   }
@@ -49,6 +49,7 @@ class SearchBook extends Component {
       let searchDetails = []
       let shelfDetails = [{id:'',shelf:''}]
 
+
     /* If a book in the search results has already been added to the
      * shelves, update the shelf info */
 
@@ -60,16 +61,24 @@ class SearchBook extends Component {
         BooksAPI.search(e.target.value).then(books => {
           books.map(book => {
              let shelf = 'none'
+             let id, name, author, url
+
               shelfDetails.map(detail => {
                 if (book.id === detail.id) {
                   shelf= detail.shelf
                 }
               })
+              
+              book.id !== ''? id= book.id: id= ''
+              book.title !== ''? name= book.title: name= ''
+              book.hasOwnProperty('authors')? author= book.authors: author= ''
+              book.hasOwnProperty('imageLinks')? url= book.imageLinks.smallThumbnail: url= ''
+
               searchDetails.push({
-                bookId: book.id,
-                bookName: book.title,
-                bookAuthor: book.authors,
-                bookUrl: book.imageLinks.smallThumbnail,
+                bookId: id,
+                bookName : name,
+                bookAuthor: author,
+                bookUrl: url,
                 shelf: shelf
               })
               this.setState({

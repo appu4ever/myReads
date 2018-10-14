@@ -18,3 +18,23 @@ To get started:
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
+
+# Files involved
+
+## App.js
+
+This file provides react router functionality and creates URLs for the main (/) and the search page (/search).
+
+## MyBooks.js
+
+This file creates parent component that forms the 3 shelves. The child component is called for each shelf to
+populate each shelf with the books data received from the backend.
+
+## BookShelf.js
+
+This file creates the child component that takes book details from parent component and creates the books using the details.
+
+## SearchBook.js
+
+This file contains methods needed to form the search page. It forms the parent for the child component BookShelf, provides
+data it receives from the back end to the child, and populates contents into the search page.
